@@ -1,12 +1,15 @@
 # coding=utf-8
 import os
 from PyQt5.QtWidgets import (QFileDialog, QAction, QMenu, QHBoxLayout,
-                             QVBoxLayout, QMainWindow, QDockWidget, QMenuBar)
+                             QVBoxLayout, QMainWindow, QDockWidget, QMenuBar,
+                             QWidget)
 
 from PyQt5.QtCore import Qt, QModelIndex, pyqtSignal, QSize
 from PyQt5.QtGui import QIcon
 
 from .global_path import setdir, getdir, icondir, asdtype
+from .fIle_list import FileListWidget
+from .line_chart import LineChart
 
 
 class MainWindow(QMainWindow):
@@ -24,14 +27,22 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("ASD高光谱数据处理")
         self.setWindowIcon(QIcon(os.path.join(icondir, "icon.png")))
         # add custom menu
-        menu_bar = MenuBar(self)
+        menu_bar = MenuBar(parent=self)
         menu_bar.file_action_trigger(self.get_open_files)
         menu_bar.dir_action_trigger(self.get_open_dir)
+        self.setMenuBar(menu_bar)
         # add dock widget
         file_list = QDockWidget("光谱文件列表", self)
         file_list.setAllowedAreas(Qt.LeftDockWidgetArea |
                                   Qt.RightDockWidgetArea)
-        # itemListWidget = ItemListWidget()
+        file_list_widget = FileListWidget()
+        file_list.setWidget(file_list_widget)
+        # add selected file to item list
+        self.selected_sig.connect(file_list_widget.add_files)
+        self.addDockWidget(Qt.LeftDockWidgetArea, file_list)
+        centre = LineChart()
+        self.setCentralWidget(centre)
+        file_list_widget.itemChanged.connect(centre.set_items)
 
     def get_open_dir(self):
         """
@@ -46,7 +57,7 @@ class MainWindow(QMainWindow):
             self.selected_file = [fi for fi in files if os.path.isfile(fi)]
             self.selected_sig.emit(self.selected_file)
             self.selected_dir = selected
-            setdir(self.selectedDir)
+            setdir(self.selected_dir)
         return selected
 
     def get_open_files(self):
@@ -58,7 +69,7 @@ class MainWindow(QMainWindow):
                                              asdtype)[0]
         if files:
             self.selected_file = files
-            tmp_dir = os.path.dirname(os.path.dirname(files))
+            tmp_dir = os.path.dirname(os.path.dirname(files[0]))
             self.selected_dir = tmp_dir
             setdir(tmp_dir)
             self.selected_sig.emit(files)
@@ -82,17 +93,17 @@ class MenuBar(QMenuBar):
         parent = self.parentWidget()
         self.dir_action = QAction("打开文件夹...", parent)
         self.file_action = QAction("打开文件...", parent)
-        self.img_action = QAction("保存图像", parent)
+        self.img_action = QAction("保存图像...", parent)
         # add file menu
-        file_menu = QMenu(self)
+        file_menu = self.addMenu("文件")
         file_menu.addAction(self.dir_action)
         file_menu.addAction(self.file_action)
         file_menu.addSeparator()
         file_menu.addAction(self.img_action)
-        self.addMenu(file_menu)
+        # self.addMenu(file_menu)
 
-    def set_process_menu(self, process=None):
-        self.process_menu = process
+    def set_process_menu(self, func=None):
+        self.process_menu = func
 
     def file_action_trigger(self, func=None):
         self.file_action.triggered.connect(func)

@@ -4,18 +4,18 @@ import numpy as np
 from fractions import Fraction
 
 
-def checkData(data):
+def check_data(data):
     if not hasattr(data, "__iter__"):
         data = [data]
 
     col = len(data[0])
     for da in data:
-        if len(da) != col or not isNumber(da):
+        if len(da) != col or not is_number(da):
             return False
     return True
 
 
-def isNumber(data):
+def is_number(data):
     for i in data:
         try:
             tts = float(i)
@@ -25,7 +25,7 @@ def isNumber(data):
     return True
 
 
-def getDataRange(data):
+def get_data_range(data):
     """
     获取数据的最大和最小值
     """
@@ -33,7 +33,7 @@ def getDataRange(data):
     return np.nanmin(data), np.nanmax(data)
 
 
-def newBound(vmin, vmax, ticks=7):
+def new_bound(vmin, vmax, ticks=7):
     """
     计算在给定ticks下的数据的新边界，
     返回新的上下边界和数据间隔
