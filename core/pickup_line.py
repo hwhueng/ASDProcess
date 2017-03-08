@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+自动挑线
+"""
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -130,8 +133,8 @@ class PickUpLine:
             # line choose
             result_index = self.line_choose(group_data)
             length = len(result_index)
-            print("Processing:[" + group_name[i][0] + "-->"
-                  + group_name[i][-1])
+            print("Processing:[", group_name[i][0], "-->",
+                  group_name[i][-1])
             if length > 3:
                 good_file = []
                 for j in result_index:

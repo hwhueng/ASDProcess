@@ -75,19 +75,21 @@ def cubic_smooth5(data, loop=1):
     """
     length = len(data)
     data = data.copy()
-    last = length-2
+    last = length - 2
     temp = [0 for i in range(length)]
 
     for i in range(loop):
-        temp[0] = (69*data[0]+4*data[1]-6*data[2]+4*data[3]-data[4])/70
-        temp[1] = (2*data[0]+27*data[1]+12*data[2]-8*data[3]+2*data[4])/35
+        temp[0] = (69 * data[0] + 4 * data[1] - 6 * data[2] +
+                   4 * data[3] - data[4]) / 70
+        temp[1] = (2 * data[0] + 27 * data[1] + 12 * data[2] - 8 * data[3] +
+                   2 * data[4]) / 35
         for j in range(2, last):
-            temp[j] = (-3*(data[j-2]+data[j+2])+12*(data[j-1]+data[j+1])
-                       + 17*data[j])/35
-        temp[length-2] = (2*data[length-5]-8*data[length-4]+12*data[length-3]
-                          + 27*data[length-2]+2*data[length-1])/35
-        temp[length-1] = (-data[length-5]+4*data[length-4]-6*data[length-3]
-                          + 4*data[length-2]+69*data[length-1])/70
+            temp[j] = (-3 * (data[j - 2] + data[j + 2]) + 12 * (data[j - 1] + data[j + 1]) +
+                       17 * data[j]) / 35
+        temp[length - 2] = (2 * data[length - 5] - 8 * data[length - 4] + 12 * data[length - 3] +
+                            27 * data[length - 2] + 2 * data[length - 1]) / 35
+        temp[length - 1] = (-data[length - 5] + 4 * data[length - 4] - 6 * data[length - 3] +
+                            4 * data[length - 2] + 69 * data[length - 1]) / 70
         data = temp
 
     return data
@@ -131,29 +133,33 @@ def cubic_smooth7(data, loop=1):
 
     length = len(data)
     data = data.copy()
-    last = length-3
+    last = length - 3
     temp = [0 for i in range(length)]
 
     for i in range(loop):
-        temp[0] = (39*data[0]+8*data[1]-4*data[2]-4*data[3]
-                   +data[4]+4*data[5]-2*data[6])/42
-        temp[1] = (8*data[0]+19*data[1]+16*data[2]+6*data[3]
-                   -4*data[4]-7*data[5]+4*data[6])/42
-        temp[3] = (-4*data[0]+16*data[1]+19*data[2]+12*data[3]
-                   +2*data[4]-4*data[5]+data[6])/42
+        temp[0] = (39 * data[0] + 8 * data[1] - 4 * data[2] - 4 * data[3] +
+                   data[4] + 4 * data[5] - 2 * data[6]) / 42
+        temp[1] = (8 * data[0] + 19 * data[1] + 16 * data[2] + 6 * data[3] -
+                   4 * data[4] - 7 * data[5] + 4 * data[6]) / 42
+        temp[3] = (-4 * data[0] + 16 * data[1] + 19 * data[2] + 12 * data[3] +
+                   2 * data[4] - 4 * data[5] + data[6]) / 42
 
         for j in range(3, last):
-            temp[j] = (-2*(data[j+3]+data[j-3])+3*(data[j-2]+data[j+2])
-                       + 6*(data[j-1]+data[j+1])+7*data[j])/21
-        temp[length-3] = (-4*data[length-1]+16*data[length-2]+19*data[length-3]
-                          + 12*data[length-4]+2*data[length-5]-4*data[length-6]
-                          + data[length-7])/42
-        temp[length-2] = (8*data[length-1]+19*data[length-2]+16*data[length-3]
-                          + 6*data[length-4]-4*data[length-5]-7*data[length-6]
-                          + 4*data[length-7])/42
-        temp[length-1] = (39*data[length-1]+8*data[length-2]-4*data[length-3]
-                          - 4*data[length-4]+data[length-5]+4*data[length-6]
-                          - 2*data[length-7])/42
+            temp[j] = (-2 * (data[j + 3] + data[j - 3]) + 3 * (data[j - 2] +
+                       data[j + 2]) + 6 * (data[j - 1] + data[j + 1]) +
+                       7 * data[j]) / 21
+        temp[length - 3] = (-4 * data[length - 1] + 16 * data[length - 2] +
+                            19 * data[length - 3] + 12 * data[length - 4] +
+                            2 * data[length - 5] - 4 * data[length - 6] +
+                            data[length - 7]) / 42
+        temp[length - 2] = (8 * data[length - 1] + 19 * data[length - 2] +
+                            16 * data[length - 3] + 6 * data[length - 4] -
+                            4 * data[length - 5] - 7 * data[length - 6] +
+                            4 * data[length - 7]) / 42
+        temp[length - 1] = (39 * data[length - 1] + 8 * data[length - 2] -
+                            4 * data[length - 3] - 4 * data[length - 4] +
+                            data[length - 5] + 4 * data[length - 6] -
+                            2 * data[length - 7]) / 42
         data = temp
 
     return data

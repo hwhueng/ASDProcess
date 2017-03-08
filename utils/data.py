@@ -50,7 +50,7 @@ def new_bound(vmin, vmax, ticks=7):
         ticks = 2
     delta = abs(vmax - vmin) / (ticks - 1)
     # print("delta:", delta)
-    t3 = "%.2E" % delta
+    t3 = format(delta, ".2E")
     p3 = t3.find("E")
     order3 = int(t3[p3 + 1:])
 

@@ -63,10 +63,10 @@ def continuum_line(data, points):
     line = [float('nan') for i in range(length)]
 
     for i in range(1, num):
-        start = points[i-1]
+        start = points[i - 1]
         end = points[i]
         for j in range(start, end + 1):
-            temp = (data[end] - data[start])*(j-start)/(end-start)+data[start]
+            temp = (data[end] - data[start]) * (j - start) / (end - start) + data[start]
             line[j] = round(temp, 7)
 
     return line

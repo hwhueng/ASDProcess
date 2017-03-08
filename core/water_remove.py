@@ -67,7 +67,7 @@ def process_dir(data_dir, result_dir=None):
         head, data = asd_read(file_)
         data = water_remove(data)
         data = struct.pack("2151b", *data)
-        out_file = os.path.join(result_dir, filename+".ref")
+        out_file = os.path.join(result_dir, filename + ".ref")
         with open(out_file, "wb") as asd_:
             asd_.write(head)
             asd_.write(data)

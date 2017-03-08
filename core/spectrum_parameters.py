@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+计算光谱参量
+"""
 import numpy as np
 from .derivation import derivation1
 from collections import OrderedDict

@@ -18,7 +18,7 @@ def derivation1(data):
     last = length - 1
 
     for i in range(1, last):
-        der[i] = (data[i+1]-data[i-1])/2
+        der[i] = (data[i + 1] - data[i - 1]) / 2
 
     return der
 
@@ -36,7 +36,7 @@ def derivation2(data):
     last = length - 2
 
     for i in range(2, last):
-        der[i] = (data[i+2]-2*data[i]+data[i-2])/4
+        der[i] = (data[i + 2] - 2 * data[i] + data[i - 2]) / 4
 
     return der
 
@@ -54,6 +54,6 @@ def derivation3(data):
     last = length - 3
 
     for i in range(3, last):
-        der[i] = (data[i+3]-3*data[i+1]+3*data[i-1]-data[i-3])/8
+        der[i] = (data[i + 3] - 3 * data[i + 1] + 3 * data[i - 1] - data[i - 3]) / 8
 
     return der
