@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor
 
 from .color import cnames
-from .global_path import setdir, getdir
+from .global_path import setdir
 from ..core.asd import asd_read
 
 
